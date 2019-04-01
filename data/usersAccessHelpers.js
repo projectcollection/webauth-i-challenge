@@ -3,9 +3,9 @@ const db = require('./knexConfigged')
 
 const users = 'users'
 
-const addUser = (user) => {
-    return db(users).insert({...user, password: bcrypt.hashSync(user.password, 4)})
-    // dunno why getUser() doesn't work here
+const addUser = async (user) => {
+    const [id] = await db(users).insert({...user, password: bcrypt.hashSync(user.password, 4)})
+    return getUser(id)
 }
 
 const authenticate = (userCreds) => {

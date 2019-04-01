@@ -14,8 +14,7 @@ router.post('/register', async (req, res) => {
         return
     }else{
         try{
-            const userids = await db.addUser(req.body)
-            const user = await db.getUser(userids[0])
+            const user = await db.addUser(req.body)
             res.status(201).json(user)
         }catch(e){
             res.status(500).json('server error')
