@@ -4,9 +4,7 @@ const bcrypt = require('bcryptjs')
 const db = require('../data/usersAccessHelpers')
 const middlewares = require('../middlewares')
 
-router.get('/', (req, res) => {
-    res.send('wtf is goin on')
-})
+
 router.post('/register', async (req, res) => {
     const {firstName, lastName, username, password} = req.body
 
