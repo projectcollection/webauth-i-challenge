@@ -5,7 +5,7 @@ const users = 'users'
 
 const addUser = async (user) => {
     const [id] = await db(users).insert({...user, password: bcrypt.hashSync(user.password, 4)})
-    return getUser(id)
+    return getUserById(id)
 }
 
 const authenticate = (userCreds) => {
@@ -14,9 +14,14 @@ const authenticate = (userCreds) => {
     })
 }
 
-const getUser = (id) => {
+const getUserById = (id) => {
     return db(users).where({id}).first()
 }
+
+const getUserBy = (filter) => {
+    return db(users).where(filter)
+}
+
 const getUsers = () => {
     return db(users)
 }
@@ -24,6 +29,7 @@ const getUsers = () => {
 module.exports = {
     addUser,
     authenticate,
-    getUser,
+    getUserById,
+    getUserBy,
     getUsers
 }
